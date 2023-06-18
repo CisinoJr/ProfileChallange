@@ -16,20 +16,27 @@ struct ContentView: View {
 			
 			Image("Wallpaper")
 				.resizable()
-				.frame(maxHeight: 230)
+				.frame(maxHeight: 240)
 				.ignoresSafeArea()
 			
-			AsyncImage(
-				url: URL(string: "https://avatars.githubusercontent.com/u/16160637?v=4")
-			)
-			.frame(width: 150, height: 150)
-			.clipShape(Circle())
-			.padding(.top, 90)
+			AsyncImage(url: URL(string: "https://avatars.githubusercontent.com/u/16160637?v=4")) { image in
+				image.resizable()
+					.frame(width: 150, height: 150)
+					.clipShape(Circle())
+					.padding(.top, 90)
+					.clipped()
+			} placeholder: {
+				ProgressView()
+					.frame(width: 150, height: 150)
+					.clipShape(Circle())
+					.padding(.top, 90)
+					.clipped()
+			}
 			
-			VStack(spacing: 30){
+			VStack{
 				WatchedMoviesView(title: "Assistidos")
 				WatchedMoviesView(title: "Na Fila")
-			}.offset(y: 280)
+			}.offset(y: 250)
 		}
 	}
 }
